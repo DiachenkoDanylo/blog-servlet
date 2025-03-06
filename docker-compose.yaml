@@ -1,0 +1,37 @@
+services:
+
+  app:
+    restart: always
+    build: .
+    container_name: java-servlets-app
+    ports:
+      - "6060:8080"
+    depends_on:
+      - database
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/usr/local/tomcat/webapps/logs
+      - ./uploads:/usr/local/tomcat/webapps/uploads  # Use named volume instead of bind mount
+    networks:
+      - app_network
+
+  database:
+    restart: always
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: diachenko
+      POSTGRES_DB: diet-blog
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
