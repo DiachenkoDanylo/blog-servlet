@@ -31,7 +31,7 @@ A simple web application for managing and tracking recipes with calorie informat
    ```
 3. Access the application at:
    ```
-   http://localhost:8080
+   http://localhost:6060
    ```
 
 ## API Endpoints
